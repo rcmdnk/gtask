@@ -1,4 +1,4 @@
 gtask
 =====
 
-List up google tasks
+List up google tasks from a command line.
