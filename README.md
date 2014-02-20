@@ -38,6 +38,3 @@ If you want to install other directory, do like:
     $ curl -fsSL https://raw.github.com/rcmdnk/gtask/install/install.sh|  prefix=~/usr/local/ sh
 
 Or, simply download scripts and set where you like.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rcmdnk/gtask/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
