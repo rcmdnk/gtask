@@ -3,7 +3,7 @@ gtask
 
 List up google tasks from a command line.
 
-# Installation
+## Installation
 
 On Mac, you can install scripts by [Homebrew](https://github.com/mxcl/homebrew):
 
