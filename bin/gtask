@@ -1,29 +1,29 @@
 #!/usr/bin/env python
 
-#The MIT License (MIT) {{{
+# The MIT License (MIT) {{{
 #
-#Copyright (c) 2013 rcmdnk
+# Copyright (c) 2013 rcmdnk
 #
-#Permission is hereby granted, free of charge, to any person obtaining a copy of
-#this software and associated documentation files (the "Software"), to deal in
-#the Software without restriction, including without limitation the rights to
-#use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-#the Software, and to permit persons to whom the Software is furnished to do so,
-#subject to the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 #
-#The above copyright notice and this permission notice shall be included in all
-#copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
 #
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-#FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-#COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-#IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-#CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#}}}
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# }}}
 
 import os
-import sys
 import httplib2
 
 from oauth2client.file import Storage
@@ -31,15 +31,17 @@ from oauth2client.tools import run
 from oauth2client.client import OAuth2WebServerFlow
 from apiclient.discovery import build
 
-def main(uselist='',items=''):
-    # Authentaation
+
+def main(uselist='', items=''):
+    # Authentication
     storage = Storage(os.path.expanduser('~/.gtask_oauth'))
     credentials = storage.get()
 
     if credentials is None or credentials.invalid:
         credentials = run(
             OAuth2WebServerFlow(
-                client_id='326384869607-9c57sseqij1vpes16ect83irq490pn8c.apps.googleusercontent.com',
+                client_id='326384869607-9c57sseqij1vpes16ect83irq490pn8c.'
+                'apps.googleusercontent.com',
                 client_secret='h0vi7XXzU3DRJyEa2aYFPRcm',
                 scope=[
                     'https://www.googleapis.com/auth/tasks',
@@ -91,10 +93,15 @@ if __name__ == '__main__':
     parser = OptionParser(usage)
     parser.add_option('-l', '--list', action='store',
                       dest='uselist', default='',
-                      help='If \'USELIST\' is not an empty, tasks will be searched for only from the given list. [default: %default]')
+                      help='If \'USELIST\' is not an empty,'
+                      ' tasks will be searched for only from the given list.'
+                      ' [default: %default]')
     parser.add_option('-i', '--item', action='store',
                       dest='item', default='',
-                      help='If \'ITEM\' is not an empty, only tasks which contains given item are listed up. Multiple words can be given by using \',\' as a separator. [default: %default]')
+                      help='If \'ITEM\' is not an empty, only tasks which'
+                      ' contains given item are listed up.'
+                      ' Multiple words can be given by using \',\''
+                      ' as a separator. [default: %default]')
     (opts, args) = parser.parse_args()
 
     # Set parameters
