@@ -32,6 +32,7 @@ import httplib2
 
 from oauth2client.file import Storage
 from oauth2client.tools import run_flow
+from oauth2client.tools import argparser
 from oauth2client.client import OAuth2WebServerFlow
 from apiclient.discovery import build
 
@@ -46,6 +47,7 @@ def main(uselist='', items=''):
     credentials = storage.get()
 
     if credentials is None or credentials.invalid:
+        args, unknown = argparser.parse_known_args(sys.argv)
         credentials = run_flow(
             OAuth2WebServerFlow(
                 client_id='326384869607-9c57sseqij1vpes16ect83irq490pn8c.'
@@ -55,7 +57,7 @@ def main(uselist='', items=''):
                     'https://www.googleapis.com/auth/tasks',
                     'https://www.googleapis.com/auth/tasks.readonly'],
                 user_agent='gtaskslist/1.0',),
-            storage)
+            storage, args)
 
     http = httplib2.Http()
     http = credentials.authorize(http)
