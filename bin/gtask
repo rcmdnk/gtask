@@ -66,20 +66,22 @@ def main(uselist='', items=''):
 
     # Get task lists
     tasklists = service.tasklists().list().execute()
-    for tl in tasklists['items']:
+    for task_list in tasklists['items']:
         # Check list name
-        if uselist != '' and tl['title'] != uselist:
+        if uselist not in ('', task_list['title']):
             continue
 
         # Get tasks
-        tasks = service.tasks().list(tasklist=tl['id']).execute()
-        for t in tasks['items']:
+        tasks = service.tasks().list(tasklist=task_list['id']).execute()
+        if 'items' not in tasks:
+            continue
+        for task in tasks['items']:
 
-            ttitle = t['title']
+            ttitle = task['title']
             if ttitle == '':
                 continue
             useflag = 0
-            if len(items) == 0 or items[0] == '':
+            if items or items[0] == '':
                 useflag = 1
             else:
                 for i in items:
@@ -91,7 +93,8 @@ def main(uselist='', items=''):
                     ttitle = ttitle.encode('utf_8')
                 print(ttitle)
 
-if __name__ == '__main__':
+
+def arg_parser(argv):
     # Get command line options
     from optparse import OptionParser
     usage = '''usage: %prog [-opts] arg1 arg2
@@ -114,13 +117,15 @@ if __name__ == '__main__':
                       ' contains given item are listed up.'
                       ' Multiple words can be given by using \',\''
                       ' as a separator. [default: %default]')
-    (opts, args) = parser.parse_args()
+    (opts, args) = parser.parse_args(argv)
 
     # Set parameters
     uselist = opts.uselist
     items = opts.item.split(',')
     for i in args:
         items.append(i)
-
-    # Run main function
     main(uselist, items)
+
+
+if __name__ == '__main__':
+    arg_parser(sys.argv)
